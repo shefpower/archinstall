@@ -1,0 +1,988 @@
+#!/bin/bash
+#
+#  Arch Linux Install (Archinstall) v1.0.0
+# ----------------------------------------|
+#           :
+# Author    : LinuxShef
+#           :
+# Project   : https://github.com/LinuxShef/archinstall.git
+#           :
+# License   : LGPL-3.0 (http://opensource.org/licenses/lgpl-3.0.html)
+#           :
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+
+ $$$$$$\                      $$\       $$\                       $$\               $$\ $$\
+$$  __$$\                     $$ |      \__|                      $$ |              $$ |$$ |
+$$ /  $$ | $$$$$$\   $$$$$$$\ $$$$$$$\  $$\ $$$$$$$\   $$$$$$$\ $$$$$$\    $$$$$$\  $$ |$$ |
+$$$$$$$$ |$$  __$$\ $$  _____|$$  __$$\ $$ |$$  __$$\ $$  _____|\_$$  _|   \____$$\ $$ |$$ |
+$$  __$$ |$$ |  \__|$$ /      $$ |  $$ |$$ |$$ |  $$ |\$$$$$$\    $$ |     $$$$$$$ |$$ |$$ |
+$$ |  $$ |$$ |      $$ |      $$ |  $$ |$$ |$$ |  $$ | \____$$\   $$ |$$\ $$  __$$ |$$ |$$ |
+$$ |  $$ |$$ |      \$$$$$$$\ $$ |  $$ |$$ |$$ |  $$ |$$$$$$$  |  \$$$$  |\$$$$$$$ |$$ |$$ |
+\__|  \__|\__|       \_______|\__|  \__|\__|\__|  \__|\_______/    \____/  \_______|\__|\__|
+
+
+'
+sleep 2
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+ $$$$$$\              $$\     $$\
+$$  __$$\             $$ |    $$ |
+$$ /  $$ |$$\   $$\ $$$$$$\   $$$$$$$\   $$$$$$\   $$$$$$\
+$$$$$$$$ |$$ |  $$ |\_$$  _|  $$  __$$\ $$  __$$\ $$  __$$\
+$$  __$$ |$$ |  $$ |  $$ |    $$ |  $$ |$$ /  $$ |$$ |  \__|
+$$ |  $$ |$$ |  $$ |  $$ |$$\ $$ |  $$ |$$ |  $$ |$$ |
+$$ |  $$ |\$$$$$$  |  \$$$$  |$$ |  $$ |\$$$$$$  |$$ |
+\__|  \__| \______/    \____/ \__|  \__| \______/ \__|
+
+
+
+$$\       $$\                                $$$$$$\  $$\                  $$$$$$\
+$$ |      \__|                              $$  __$$\ $$ |                $$  __$$\
+$$ |      $$\ $$$$$$$\  $$\   $$\ $$\   $$\ $$ /  \__|$$$$$$$\   $$$$$$\  $$ /  \__|
+$$ |      $$ |$$  __$$\ $$ |  $$ |\$$\ $$  |\$$$$$$\  $$  __$$\ $$  __$$\ $$$$\
+$$ |      $$ |$$ |  $$ |$$ |  $$ | \$$$$  /  \____$$\ $$ |  $$ |$$$$$$$$ |$$  _|
+$$ |      $$ |$$ |  $$ |$$ |  $$ | $$  $$<  $$\   $$ |$$ |  $$ |$$   ____|$$ |
+$$$$$$$$\ $$ |$$ |  $$ |\$$$$$$  |$$  /\$$\ \$$$$$$  |$$ |  $$ |\$$$$$$$\ $$ |
+\________|\__|\__|  \__| \______/ \__/  \__| \______/ \__|  \__| \_______|\__|
+
+
+'
+sleep 2
+#----------------------------------------------------------------------|
+#                                                      #
+#               Change of localization                 #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                 ██╗      ██████╗  █████╗ ██████╗ ██╗███╗   ██╗ ██████╗
+                 ██║     ██╔═══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝
+                 ██║     ██║   ██║███████║██║  ██║██║██╔██╗ ██║██║  ███╗
+                 ██║     ██║   ██║██╔══██║██║  ██║██║██║╚██╗██║██║   ██║
+                 ███████╗╚██████╔╝██║  ██║██████╔╝██║██║ ╚████║╚██████╔╝██╗██╗██╗
+                 ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝╚═╝
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+sed -i s/'#en_US.UTF-8'/'en_US.UTF-8'/g /etc/locale.gen
+sed -i s/'#ru_RU.UTF-8'/'ru_RU.UTF-8'/g /etc/locale.gen
+echo 'LANG=ru_RU.UTF-8' > /etc/locale.conf
+echo 'KEYMAP=ru' > /etc/vconsole.conf
+echo 'FONT=cyr-sun16' >> /etc/vconsole.conf
+setfont cyr-sun16
+locale-gen >/dev/null 2>&1; RETVAL=$?
+clear
+#----------------------------------------------------------------------|
+#                                                      #
+#                     Choice Disk                      #
+#                                                      #
+#----------------------------------------------------------------------|
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<<<< Выбор диска >>>>>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                      Сейчас будет выведена информация о дисках
+
+                 Выберите тот диск на который будет установлена система
+
+                        Например ( sda , sdb, sdc , nvme0n1p )
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+                         -> Нажмите Enter для продолжения <- "
+clear
+fdisk -l
+echo '
+
+                <<<<<<<<<<<<<<<<<<<< Разметка диска >>>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                           Введите имя диска для разметки
+
+                  ** Обязательно для последующей установки загрузчика **
+
+                        Например ( sda , sdb, sdc , nvme0n1p )
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+read -p "
+                        -> Введите значение : " disk
+cfdisk /dev/$disk
+#----------------------------------------------------------------------|
+#                                                      #
+#                  Choice partition                    #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<<<< Выбор разделов >>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                           Введите одно из значений  n или  y
+
+                         Для перехода к монтированию раздов диска
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+    echo -e "
+
+      \t -> Для вывода подсказки , информации о разделах и переход к монтированию ( 1 )"
+
+    echo -e "
+
+      \t -> Для перехода сразу к монтированию разделов  ( 2 )"
+
+    echo -n "
+
+                -> Введите значение : "
+
+      read main_menu
+      case "$main_menu" in
+         "1" ) clear ; fdisk -l ;
+           ;;
+         "2" ) clear ;
+      esac
+#----------------------------------------------------------------------|
+echo '
+
+
+
+
+                <<<<<<<<<<<<<<<<<<<<< Выбор разделов >>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                     Введите разделы диска в отведенные для них поля
+
+                   (Root- Корневой)  (Boot- Загрузочный) (Swap- Подкачка)
+
+                        Например ( sda2, sdb2, sdc2 , nvme0n1p2 )
+
+         ** Внимание ! Если вы не создали swap или home то оставьте поле пустым **
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                       -> Чтобы пропустить это шаг нажмите Enter <-
+'
+read -p "
+                                 -> Boot: " boot
+read -p "
+                                 -> Root: " root
+read -p "
+                                 -> Swap: " swap
+read -p "
+                                 -> Home: " home
+echo $boot
+echo $root
+echo $swap
+echo $home
+#----------------------------------------------------------------------|
+#                                                      #
+#                 Make filesystem partition            #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<< Выбор файловой системы Boot раздела >>>>>>>>>>
+                ----------------------------------------------------------
+
+                    Выберите файловую систему загрузочного  boot раздела
+
+                 Согласно вашей версии Bios (обычный стрый BIOS или UEFI)
+
+                 Для UEFI формат FAT32 . Для обычнго BIOS Ext4 или Ext2
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>v
+                      -> Чтобы пропустить это шаг нажмите Enter <-
+'
+echo -e "\t
+
+                       -> Для UEFI введите ( fat32 )"
+echo -e "\t
+
+                       -> Для обычного Bios форматировать в Ext4 введите ( ext4 )"
+echo -e "\t
+
+                       -> Для обычного Bios фоматировать в Ext2 введиет ( ext2 )"
+echo -n "
+
+                           -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "fat32" ) clear ; mkfs.vfat -F32 /dev/$boot
+         ;;
+         "ext4" ) clear ; mkfs.ext4 /dev/$boot
+         ;;
+         "ext2" ) clear ; mkfs.ext2 /dev/$boot
+      esac
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<< Выбор файловой системы корневого раздела >>>>>>>
+                ----------------------------------------------------------
+
+                     Выберите файловую систему корневого Root раздела
+
+                                      Btrfs или Ext4
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                        Чтобы пропустить это шаг нажмите Enter
+'
+echo -e "\t
+
+                        -> Форматировать в Btrfs введите ( btrfs )"
+echo -e "\t
+
+                        -> Форматировать в Ext4 введите ( ext4 )"
+echo -n "
+
+                            -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "btrfs" ) clear ; mkfs.btrfs -f /dev/$root
+         ;;
+         "ext4" ) clear ; mkfs.ext4 /dev/$root
+      esac
+#----------------------------------------------------------------------|
+clear
+mkswap /dev/$swap
+swapon /dev/$swap
+#----------------------------------------------------------------------|
+#                                                      #
+#                    Mounts partition                  #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<< Монтирование домашнего home раздела >>>>>>>>>>
+                ----------------------------------------------------------
+
+                      Сейчас будет выведена информация о дисках
+
+                 Выберите тот диск на который будет установлена система
+
+                        Например ( sda , sdb, sdc , nvme0n1p )
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+echo -e "\t
+                    -> Смонтировать Home если выбрана Btrfs введите ( 1 )"
+echo -e "\t
+
+                    -> Смонтировать Home если выбрана Ext4 ( 2 )"
+echo -e "\t
+
+                    -> Продолжить в Btrfs без home введите ( 3 )"
+echo -e "\t
+
+                    -> Продолжить в Ext4 без home введите ( 4 ) "
+echo -n "
+
+                      -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" ) clear ;
+mount  /dev/$root /mnt
+
+btrfs su cr /mnt/@
+
+btrfs su cr /mnt/@home
+
+btrfs su cr /mnt/@var
+
+btrfs su cr /mnt/@var_log
+
+btrfs su cr /mnt/@snapshots
+
+umount /mnt
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@ /dev/$root /mnt
+
+mkdir /mnt/{boot,home,var,var_log,.snapshots}
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@home  /dev/$home  /mnt/home
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@var  /dev/$root  /mnt/var
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@var_log /dev/$root /mnt/var_log
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@snapshots  /dev/$root  /mnt/.snapshots
+         ;;
+         "2" ) clear ;
+mount  /dev/$root /mnt
+mkdir /mnt/home
+mount /dev/$home /mnt/home
+         ;;
+         "3") clear ;
+mount  /dev/$root /mnt
+
+btrfs su cr /mnt/@
+
+btrfs su cr /mnt/@home
+
+btrfs su cr /mnt/@var
+
+btrfs su cr /mnt/@var_log
+
+btrfs su cr /mnt/@snapshots
+
+umount /mnt
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@ /dev/$root /mnt
+
+mkdir /mnt/{boot,home,var,var_log,.snapshots}
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@home  /dev/$root  /mnt/home
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@var  /dev/$root  /mnt/var
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@var_log /dev/$root /mnt/var_log
+
+mount -o rw,noatime,compress=zstd:2,space_cache=v2,discard=async,subvol=@snapshots  /dev/$root  /mnt/.snapshots
+         ;;
+         "4" ) clear ;
+mount  /dev/$root /mnt
+mkdir /mnt/boot
+      esac
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<< Монтирование boot раздела >>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                          Монтирование загрузочного раздела !
+
+                   Выберите один из варинтов монтирования boot раздела
+
+                       Для обычного биоса (НЕ UEFI) введите Bios
+
+                             Для UEFI биоса , введите Uefi
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+echo -e "\t
+                        -> Для UEFI или EFI введите ( 1 ) "
+echo -e "\t
+                        -> Для обычного Bios введите ( 2 )"
+echo -n "
+                        -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" ) mkdir /mnt/boot/efi ; mount /dev/$boot /mnt/boot/efi
+         ;;
+         "2" ) mount /dev/$boot  /mnt/boot/
+      esac
+#----------------------------------------------------------------------|
+#                                                      #
+#             Create a password and account            #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<<<< Парль root >>>>>>>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                                 Укажите парль Root
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+read -p "
+                    -> Введите пароль root :  " password
+clear
+echo '
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<< Учетная запись пользователя >>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                            Ведите имя вашей учетной записи
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+read -p "
+                    -> Введите имя учетной записи :  " username
+clear
+echo '
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<< Парль учетной записи пользователя >>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                          Укажите парль вашей учетной записи
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+read -p "
+                    -> Введите пароль пользователя :  " userpassword
+clear
+echo $password
+echo $username
+echo $userpassword
+#----------------------------------------------------------------------|
+#                                                      #
+#                         Pacman                       #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+sed -i s/'#ParallelDownloads = 5'/'ParallelDownloads = 5'/g /etc/pacman.conf
+sed -i s/'#VerbosePkgLists'/'VerbosePkgLists'/g /etc/pacman.conf
+sed -i s/'#Color'/'ILoveCandy'/g /etc/pacman.conf
+echo '
+
+
+
+
+
+
+
+
+
+───────────────────────────────────────────────────────────────|
+──────────────────────
+────────────────────── ██████╗  █████╗  ██████╗███╗   ███╗ █████╗ ███╗   ██╗
+────────────────────── ██╔══██╗██╔══██╗██╔════╝████╗ ████║██╔══██╗████╗  ██║
+──▒▒▒▒▒────▄████▄───── ██████╔╝███████║██║     ██╔████╔██║███████║██╔██╗ ██║
+─▒─▄▒─▄▒──███▄█▀────── ██╔═══╝ ██╔══██║██║     ██║╚██╔╝██║██╔══██║██║╚██╗██║
+─▒▒▒▒▒▒▒─▐████──█──█── ██║     ██║  ██║╚██████╗██║ ╚═╝ ██║██║  ██║██║ ╚████║
+─▒▒▒▒▒▒▒──█████▄────── ╚═╝     ╚═╝  ╚═╝ ╚═════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝
+─▒─▒─▒─▒───▀████▀─────────────────────────────────────────────────────────────────|
+
+                       Пожалуйста пдождите , идет настройка скачивания пакетов,
+
+                                  это займет пару мнгновений ) .......
+
+                          ! Внимание , у вас должен быть подключен интернет
+
+              ─────────────────────────────────────────────────────────────────────────────────────|
+'
+sleep 2
+dhcpcd
+pacman -Syy reflector archlinux-keyring --noconfirm ; clear
+reflector --sort rate -l 10 --save /etc/pacman.d/mirrorlist
+pacman -Syy ; clear
+#----------------------------------------------------------------------|
+#                                                      #
+#                        Pacstrap                      #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<< Выбор ядра системы >>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                  Выберите один из варинтов ядра ,для установки системы :
+
+                   -> С обычным ядром Linux - введите 1
+
+                   -> C производительным ядром Linux-zen - введите 2
+
+                   -> С ядром повышеной стабильности Linux-lts - введите 3
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+echo -e "\t
+                                 -> Linux ( 1 ) "
+echo -e "\t
+                                 -> Linux-zen ( 2 )"
+echo -e "\t
+                                 -> Linux-lts ( 3 )"
+echo -n "
+                                 -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+
+         "1" ) clear ; pacstrap -i /mnt base base-devel linux linux-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+         ;;
+         "2" ) clear ; pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+         ;;
+         "3" ) clear ; pacstrap -i /mnt base base-devel linux-lts linux-lts-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+      esac
+#----------------------------------------------------------------------|
+#                                                      #
+#                         Fstab                        #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+genfstab -U /mnt >> /mnt/etc/fstab
+#----------------------------------------------------------------------|
+#                                                      #
+#                         Chroot                       #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<< Настройка региона >>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                Настройка региона вытавляет часовой пояс и время согласно
+
+                                 выставленному региону
+
+                              Выберите один из варинтов
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+echo -e "\t
+                            -> Вывести список регинов введите -  ( 1 )"
+echo -e "\t
+
+                            -> Сразу перейти к вводу региона введите ( 2 ) "
+echo -n "
+
+                            -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" ) clear ;
+echo '
+
+
+
+                <<<<<<<<<<<<<<<<<<< Настройка региона >>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                 Выберите нужную вам временную зону и введите ее номер
+
+                                  1 , 2 ,3 ... и так далее
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+echo -e "\t                        /Africa (1)"
+echo -e "\t                                      /America (9)"
+echo -e "\t                    /Antarctica (2)"
+echo -e "\t                                      /Arctic (10)"
+echo -e "\t                    /Asia (3)"
+echo -e "\t                                      /Atlantic (11)"
+echo -e "\t                    /Australia (4)"
+echo -e "\t                                      /Brazil (12)"
+echo -e "\t                    /Canada (5)"
+echo -e "\t                                      /Chile (13)"
+echo -e "\t                     /Etc (6)"
+echo -e "\t                                      /Europe (14)"
+echo -e "\t                    /Indian (7)"
+echo -e "\t                                      /Mexico (15)"
+echo -e "\t                      /US (8)"
+echo -n "
+                                -> Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" )  ls /usr/share/zoneinfo/Africa ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+
+         ;;
+         "2" )  ls /usr/share/zoneinfo/Antarctica ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "3" )  ls /usr/share/zoneinfo/Asia ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "4" )  ls /usr/share/zoneinfo/Australia ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "5" )  ls /usr/share/zoneinfo/Canada ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "6" )  ls /usr/share/zoneinfo/Etc ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear  ;
+         ;;
+         "7" )  ls /usr/share/zoneinfo/Indian ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "8" )  ls /usr/share/zoneinfo/US ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "9" )  ls /usr/share/zoneinfo/America ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "10" )  ls /usr/share/zoneinfo/Arctic ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "11" )  ls /usr/share/zoneinfo/Atlantic ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "12" )  ls /usr/share/zoneinfo/Brazil ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "13" )  ls /usr/share/zoneinfo/Chile ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "14" )  ls /usr/share/zoneinfo/Europe ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "15" )  ls /usr/share/zoneinfo/Mexico ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+         "16" )  ls /usr/share/zoneinfo/US ;
+sleep 1
+read -t 99999 -n 1 -s -r -p "
+
+                         -> Нажмите Enter для продолжения <- "
+clear ;
+         ;;
+      esac
+
+         ;;
+         "2") clear ;
+      esac
+clear
+#----------------------------------------------------------------------|
+echo '
+
+
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<<< Настройка региона >>>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+
+                  Введите выбранный вами регион в формате /Zone/SubZone
+
+                               Например: /Europe/Moscow
+
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'
+read -p "
+                          -> Введите регион  : " region
+echo $region
+#----------------------------------------------------------------------|
+arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/$region /etc/localtime"
+arch-chroot /mnt /bin/bash -c "hwclock --systohc"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#en_US.UTF-8'/'en_US.UTF-8'/g /etc/locale.gen"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#ru_RU.UTF-8'/'ru_RU.UTF-8'/g /etc/locale.gen"
+arch-chroot /mnt /bin/bash -c "locale-gen"
+arch-chroot /mnt /bin/bash -c "echo 'LANG=ru_RU.UTF-8' > /etc/locale.conf"
+arch-chroot /mnt /bin/bash -c "echo 'KEYMAP=ru' > /etc/vconsole.conf"
+arch-chroot /mnt /bin/bash -c "echo 'FONT=cyr-sun16' >> /etc/vconsole.conf"
+arch-chroot /mnt /bin/bash -c "echo 'ARCH' > /etc/hostname"
+arch-chroot /mnt /bin/bash -c "echo '127.0.0.1 localhost' > /etc/hosts"
+arch-chroot /mnt /bin/bash -c "echo '::1 localhost' >> /etc/hosts"
+arch-chroot /mnt /bin/bash -c "echo '127.0.0.1 ARCH.localdomain ARCH' >> /etc/hosts"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#ParallelDownloads = 5'/'ParallelDownloads = 6'/g /etc/pacman.conf"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#VerbosePkgLists'/'VerbosePkgLists'/g /etc/pacman.conf"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#Color'/'ILoveCandy'/g /etc/pacman.conf"
+arch-chroot /mnt /bin/bash -c "sed -i s/'#%wheel ALL=(ALL) ALL'/'%wheel ALL=(ALL) ALL'/g /etc/sudoers"
+echo "root:$password" | arch-chroot /mnt chpasswd
+arch-chroot /mnt /bin/bash -c "mkinitcpio -P"
+arch-chroot /mnt /bin/bash -c "pacman -Syy networkmanager grub grub-btrfs efibootmgr dhcpcd dhclient --noconfirm"
+arch-chroot /mnt /bin/bash -c "useradd -m -G wheel -s /bin/bash $username  "
+echo "$username:$userpassword" | arch-chroot /mnt chpasswd
+arch-chroot /mnt /bin/bash -c "systemctl enable NetworkManager"
+#----------------------------------------------------------------------|
+#                                                      #
+#                         GRUB                         #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+arch-chroot /mnt /bin/bash -c "grub-install /dev/$disk"
+arch-chroot /mnt /bin/bash -c "grub-mkconfig -o /boot/grub/grub.cfg"
+#----------------------------------------------------------------------|
+#                                                      #
+#                  Desktop Environment                 #
+#                                                      #
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<< Графическая оболочка >>>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+                :                                                        :
+                :  Добро пожаловать в меню установки графичекой оболочки :
+                :                                                        :
+                :   На этом этапе будут установлены драйверы и базовые , :
+                :                                                        :
+                :    пакеты видеоускорения ,согласно вашей видеокарте    :
+                :                                                        :
+                :  Далее вы попадете в меню выбора графических оболочек! :
+                :                                                        :
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                       > Чтобы пропустить этот этап нажмите Enter <
+'
+echo -e "\t
+                           > Для графики Intel введите ( 1 ) "
+echo -e "\t
+                           > Для графики AMD введите ( 2)  "
+echo -e "\t
+                           > Для графики Nvidia введите ( 3 ) "
+echo -e "\t
+                           > Для графики Intel+Nvidia введите ( 4 ) "
+echo -e "\t
+                           > Для графики Intel+AMD введите ( 5 ) "
+echo -n "
+                           > Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
+
+        ;;
+         "2" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
+
+        ;;
+         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applt--noconfirm --noconfirm
+
+        ;;
+         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applt --noconfirm
+
+        ;;
+         "5" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
+      esac
+#----------------------------------------------------------------------|
+clear
+echo '
+
+
+
+
+
+
+
+                <<<<<<<<<<<<<<<<<< Графическая оболочка >>>>>>>>>>>>>>>>>>
+                ----------------------------------------------------------
+                :                                                        :
+                :            Теперь выберите один из вариантов           :
+                :                                                        :
+                :        Для установки нужной вам графической оболочки   :
+                :                                                        :
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                       > Чтобы пропустить этот этап нажмите Enter <
+'
+echo -e "\t
+                           > Для установки KDE введите ( 1 ) "
+echo -e "\t
+                           > Для установки GNOME введите ( 2 ) "
+echo -e "\t
+                           > Для установки XFCE введите ( 3 ) "
+echo -e "\t
+                           > Для установки I3 введите ( 4 ) "
+echo -e "\t
+                           > Для установки Lxqt введите ( 5 ) "
+echo -n "
+                           > Введите значение : "
+read main_menu
+      case "$main_menu" in
+         "1" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server plasma cups kde-applications sddm sddm-kcm firefox pakagekit-qt5 --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
+
+        ;;
+         "2" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server gnome cups gnome-extra firefox gdm --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable gdm --force"
+
+        ;;
+         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xfce4 cups xfce4-goodies lightdm firefox lightdm-gtk-greeter gvfs gvfs-mtp thunar-volman --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable lightdm --force"
+
+        ;;
+         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xinit cups xdg-utils xdg-user-dirs i3-gaps i3-status dmenu rofi xfce4-terminal firefox nitrogen picom --noconfirm
+
+         ;;
+         "5" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xdg-user-dirs cups xdg-utils firefox lxqt breeze-icons sddm sddm-kcm  --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
+      esac
+#----------------------------------------------------------------------|
+#                                                      #
+#                     Umount and Exit                  #
+#                                                      #
+#----------------------------------------------------------------------|
+arch-chroot /mnt /bin/bash -c "exit"
+umount -R /mnt
+reboot
