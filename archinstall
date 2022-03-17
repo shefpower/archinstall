@@ -614,11 +614,11 @@ echo -n "
 read main_menu
       case "$main_menu" in
 
-         "1" ) clear ; pacstrap -i /mnt base base-devel linux linux-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+         "1" ) clear ; pacstrap -i /mnt base base-devel linux linux-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
          ;;
-         "2" ) clear ; pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+         "2" ) clear ; pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
          ;;
-         "3" ) clear ; pacstrap -i /mnt base base-devel linux-lts linux-lts-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau nano --noconfirm
+         "3" ) clear ; pacstrap -i /mnt base base-devel linux-lts linux-lts-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
       esac
 #----------------------------------------------------------------------|
 #                                                      #
@@ -915,10 +915,10 @@ read main_menu
          "2" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
 
         ;;
-         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applt--noconfirm --noconfirm
+         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applet --noconfirm
 
         ;;
-         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applt --noconfirm
+         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader lib32-opencl-nvidia opencl-nvidia network-manager-applet --noconfirm
 
         ;;
          "5" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
@@ -963,10 +963,10 @@ read main_menu
          "2" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server gnome cups gnome-extra firefox gdm --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable gdm --force"
 
         ;;
-         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xfce4 cups xfce4-goodies lightdm firefox lightdm-gtk-greeter gvfs gvfs-mtp thunar-volman --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable lightdm --force"
+         "3" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xfce4 cups xfce4-goodies lightdm firefox lightdm-gtk-greeter gvfs gvfs-mtp thunar-volman network-manager-applet --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable lightdm --force"
 
         ;;
-         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xinit cups xdg-utils xdg-user-dirs i3-gaps i3-status dmenu rofi xfce4-terminal firefox nitrogen picom --noconfirm
+         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xinit cups xdg-utils xdg-user-dirs i3-gaps i3-status dmenu rofi xfce4-terminal firefox nitrogen picom network-manager-applet --noconfirm
 
          ;;
          "5" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xdg-user-dirs cups xdg-utils firefox lxqt breeze-icons sddm sddm-kcm  --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
