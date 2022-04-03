@@ -614,11 +614,11 @@ echo -n "
 read main_menu
       case "$main_menu" in
 
-         "1" ) clear ; pacstrap -i /mnt base base-devel linux linux-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
+         "1" ) clear ; pacstrap -i /mnt base base-devel linux linux-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring bluez bluez-utils nano --noconfirm
          ;;
-         "2" ) clear ; pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
+         "2" ) clear ; pacstrap -i /mnt base base-devel linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring bluez bluez-utils nano --noconfirm
          ;;
-         "3" ) clear ; pacstrap -i /mnt base base-devel linux-lts linux-lts-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring nano --noconfirm
+         "3" ) clear ; pacstrap -i /mnt base base-devel linux-lts linux-lts-headers linux-firmware dosfstools btrfs-progs xf86-video-intel intel-ucode amd-ucode iucode-tool xf86-video-amdgpu xf86-video-nouveau archlinux-keyring bluez bluez-utils nano --noconfirm
       esac
 #----------------------------------------------------------------------|
 #                                                      #
@@ -896,17 +896,17 @@ echo '
                        > Чтобы пропустить этот этап нажмите Enter <
 '
 echo -e "\t
-                           > Для графики Intel введите ( 1 ) "
+                          -> Для графики Intel введите ( 1 ) "
 echo -e "\t
-                           > Для графики AMD введите ( 2)  "
+                          -> Для графики AMD введите ( 2)  "
 echo -e "\t
-                           > Для графики Nvidia введите ( 3 ) "
+                          -> Для графики Nvidia введите ( 3 ) "
 echo -e "\t
-                           > Для графики Intel+Nvidia введите ( 4 ) "
+                          -> Для графики Intel+Nvidia введите ( 4 ) "
 echo -e "\t
-                           > Для графики Intel+AMD введите ( 5 ) "
+                          -> Для графики Intel+AMD введите ( 5 ) "
 echo -n "
-                           > Введите значение : "
+                          -> Введите значение : "
 read main_menu
       case "$main_menu" in
          "1" ) clear ; pacman -Syy ; pacstrap -i /mnt mesa mesa-demos lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader network-manager-applet --noconfirm
@@ -944,20 +944,20 @@ echo '
                        > Чтобы пропустить этот этап нажмите Enter <
 '
 echo -e "\t
-                           > Для установки KDE введите ( 1 ) "
+                          -> Для установки KDE введите ( 1 ) "
 echo -e "\t
-                           > Для установки GNOME введите ( 2 ) "
+                          -> Для установки GNOME введите ( 2 ) "
 echo -e "\t
-                           > Для установки XFCE введите ( 3 ) "
+                          -> Для установки XFCE введите ( 3 ) "
 echo -e "\t
-                           > Для установки I3 введите ( 4 ) "
+                          -> Для установки I3 введите ( 4 ) "
 echo -e "\t
-                           > Для установки Lxqt введите ( 5 ) "
+                          -> Для установки Lxqt введите ( 5 ) "
 echo -n "
-                           > Введите значение : "
+                          -> Введите значение : "
 read main_menu
       case "$main_menu" in
-         "1" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server plasma cups kde-applications sddm sddm-kcm firefox pakagekit-qt5 --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
+         "1" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xwaylan plasma cups kde-applications sddm sddm-kcm firefox pakagekit-qt5 --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
 
         ;;
          "2" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server gnome cups gnome-extra firefox gdm --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable gdm --force"
@@ -966,7 +966,7 @@ read main_menu
          "3" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xfce4 cups xfce4-goodies lightdm firefox lightdm-gtk-greeter gvfs gvfs-mtp thunar-volman network-manager-applet --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable lightdm --force"
 
         ;;
-         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xinit cups xdg-utils xdg-user-dirs i3-gaps i3-status dmenu rofi xfce4-terminal firefox nitrogen picom network-manager-applet --noconfirm
+         "4" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xorg-xinit cups xdg-utils xdg-user-dirs i3-gaps i3blocks i3status dmenu rofi xfce4-terminal firefox nitrogen picom network-manager-applet blueman --noconfirm
 
          ;;
          "5" ) clear ; pacman -Syy ; pacstrap -i /mnt xorg xorg-server xdg-user-dirs cups xdg-utils firefox lxqt breeze-icons sddm sddm-kcm  --noconfirm ; arch-chroot /mnt /bin/bash -c "systemctl enable sddm --force"
